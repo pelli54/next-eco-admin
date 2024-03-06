@@ -3,6 +3,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from '@/components/ui/sonner'
+export const dynamic = 'force-dynamic'
 
 
 export const metadata: Metadata = {

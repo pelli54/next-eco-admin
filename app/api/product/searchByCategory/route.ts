@@ -33,5 +33,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(result)
   }catch(err){
     console.log(err)
+    return NextResponse.json({ message: 'Error server' }, { status: 500 })
   }
 }
