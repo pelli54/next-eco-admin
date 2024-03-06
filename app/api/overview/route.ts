@@ -89,5 +89,8 @@ export async function GET(req: NextRequest) {
     } else {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 403 })
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json({ message: 'Error server' }, { status: 500 })
+  }
 }
