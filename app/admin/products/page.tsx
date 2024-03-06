@@ -21,7 +21,7 @@ const Page = () => {
                 <h1 className="text-2xl">Products</h1>
                 <Button onClick={() => router.push('/admin/products/form')}>
                     <Plus/>
-                    Create Product
+                    Create Product.
                 </Button>
             </div>
             <DataTable data={products} columns={columns} />
