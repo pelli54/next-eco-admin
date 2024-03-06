@@ -100,7 +100,7 @@ const LoginPage = () => {
                             <div className="text-center">
                                 <span>
                                     Don't have an account?{' '}
-                                    <a href="#">Sign Up</a>{' '}
+                                    <a href="/signup">Sign Up</a>{' '}
                                     {/** TODO add login url */}
                                 </span>
                             </div>
