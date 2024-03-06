@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./shop.db"
+}
+
+model Users {
+  id        Int         @id @default(autoincrement())
+  username  String      @unique
+  email     String      @unique
+  password  String
+  isAdmin Boolean @default(false)
+  imgUrl    String?
+  favorites Favorites[]
+  carts     Cart[]
+  orders    Orders[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
+}
+
+model Tags {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model Product {
+  id               Int            @id @default(autoincrement())
+  code             String         @unique
+  name             String
+  description      String
+  costPrice        Int 
+  sellPrice        Int
+  isActive         Boolean        @default(true)
+  category        Category     @relation(fields: [CategoryId], references: [id])
+  CategoryId      Int
+  images           ProductImage[]
+  favorites        Favorites[]
+}
+
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  url       String
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Favorites {
+  id        Int     @id @default(autoincrement())
+  user      Users   @relation(fields: [userId], references: [id])
+  userId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Cart {
+  id       Int              @id @default(autoincrement())
+  status   String
+  products ProductsOnCart[]
+  user     Users            @relation(fields: [userId], references: [id])
+  userId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductsOnCart {
+  id           Int    @id @default(autoincrement())
+  cart         Cart   @relation(fields: [cartId], references: [id])
+  cartId       Int
+  productId    Int
+  productCode  String
+  productName  String
+  productPrice Int
+  quantity     Int
+}
+
+model Orders {
+  id       Int               @id @default(autoincrement())
+  code     String            @unique
+  user     Users             @relation(fields: [userId], references: [id])
+  userId   Int
+  status   String
+  total    Int
+  nameClient String
+  contact String
+  direction String
+  note String? 
+  isDelivery Boolean @default(true)
+  products ProductsOnOrder[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductsOnOrder {
+  id           Int    @id @default(autoincrement())
+  productId    Int
+  productName  String
+  productCode  String
+  productPrice Int
+  discount     Int
+  quantity     Int
+  Orders       Orders @relation(fields: [ordersId], references: [id])
+  ordersId     Int
+}

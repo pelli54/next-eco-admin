@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:next-eco-admin}/prisma/shop.db",
+            "name": "shop"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "editor.tabSize": 2
+}
